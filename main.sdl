@@ -1,0 +1,67 @@
+domain examples
+
+service hello_world {
+    endpoints {
+    // add actions, queries, events and signals here
+        query helloWorld {
+            in {
+                who : string
+            }
+            out {
+                helloWorldMessage : string
+            }
+        }
+	    query listaItemManual{
+	    	in{
+	    	}
+	    	out{
+	    	 	listItens:item*
+	    	}
+	    }
+    }
+    entities {
+	    "Entidade que representa o cliente"
+		custom entity cliente{
+		    "Chave primaria"
+		    id: uuid?
+		    "Nome do cliente"
+		    nome: string
+		    "Data de nascimento"
+		    dataNascimento: date
+		    "Tem credito habilitado"
+		    creditoHabilitado: boolean? default: false
+		    "CPF do cliente"
+		    cpf: string
+		    "id da foto"
+		    idFoto: string?
+		}
+		
+		"Item do pedido"
+		custom entity item{
+			"Chave primária"
+			id: uuid?
+			"descrição"
+			descricao: string
+			"quantidade"
+			quantidade: double
+			"valor unitário"
+			valorUnitario: double
+		}
+		
+		"Pedido"
+		custom entity pedido{
+			"Chave primaria"
+			id: uuid?
+			"Data do pedido"
+			data: date
+			"Observações do pedido"
+			observacoes: string?
+			"Cliente do pedido"
+			cliente: cliente	
+			"Itens do pedido"
+			itens: item*
+		} 
+		
+		
+	}
+} 
